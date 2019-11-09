@@ -9,6 +9,7 @@ INGREDIENT_INDEX = 0
 PRICE_INDEX = 1
 QUIT = "QUIT"
 MAX_PRICE_HARDCODE = 15.0
+SPECIAL_UNIT_ITEMS = ["eggs", "milk", "ice cream"]
 """
     load_available_ingredients(path)
     :params: path -- a string specifying relative path to the file
@@ -65,6 +66,28 @@ def match_recipes(pantry, recipes, max_cost):
             matches.append([recipe, to_buy])
     return matches
 
+"""
+    :param recipes: a list of recipes, where is recipe is a dictionary of food:quanity pairs
+    NOTE: eggs, milk, and ice cream have special units!!!
+"""
+def get_prices(recipes, available):
+    recipes_costs = []
+    for recipe in recipes:
+        rec_cost = {}
+        for item in recipe:
+            #add this item and its price to the recipe price dictionary
+            #recipe[item] should be a float representing pounds needed
+            rec_cost[item] = recipe[item] * available[item]
+        recipes_costs.append(rec_cost)
+    return recipes_costs
+
+"""
+def special_unit_price(available, item, amount):
+    if item == "eggs":
+        #num eggs dozens * 12 * egg price
+        return
+    return 420.0
+"""
 if __name__ == "__main__":
     #load all recipe files in RECIPE_DIR into some list
     #available = load_available_ingredients("Basic_Ing.csv")
@@ -73,7 +96,7 @@ if __name__ == "__main__":
 
     #A test: what recipies can we make given this food
     #hardcoding to test stuff out
-    recipe_list = [{"eggs": 1.0, "milk": 4.0, "butter": 17.0}]
+    recipe_list = [{"bread": 1.0, "oil": 4.0, "butter": 17.0}]
 
     matching = match_recipes(user_pantry, recipe_list, MAX_PRICE_HARDCODE)
 
