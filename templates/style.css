@@ -1,0 +1,10 @@
+p {
+  font-size: 20px;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  color: white;
+}
+
+body {
+  background-image: url("ales-krivec-unsplash.jpg");
+  background-size: 100%;
+}
