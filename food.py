@@ -50,4 +50,4 @@ def give_recipes(user_ingredients):
     return render_template('results.html', ingredients_list=ingredients)
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host='0.0.0.0', port=80)
