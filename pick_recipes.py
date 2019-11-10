@@ -58,7 +58,7 @@ def match_recipes(pantry, recipes, max_cost):
         #TODO: let user indicate quantity of ingredients that they have
         for good in needed_goods:
             #print(recipe[good])
-            if good != "Title":
+            if good != "Title" and good != "URL":
                 if not (good.lower() in lower_list(pantry)):
                     to_buy.append(good)
                     #will give us the cost of the food in this recipe
@@ -110,7 +110,8 @@ def make_recipes(path):
         #print(line_data)
         #remember that the first
         new_recipe["Title"] = line_data[0]
-        for i in range(1, len(line_data) - 2, 2):
+        new_recipe["URL"] = line_data[1]
+        for i in range(2, len(line_data) - 2, 4):
             new_recipe[line_data[i]] = float(line_data[i+1])
         recipes.append(new_recipe)
     return recipes
@@ -124,9 +125,9 @@ if __name__ == "__main__":
     #available = load_available_ingredients("Basic_Ing.csv")
     #print(available)
 
-    #A test: what recipies can we make given this food
+    #A test: what recipes can we make given this food
     #hardcoding to test stuff out
-    my_recps = make_recipes("Recipes_Prices.csv")
+    my_recps = make_recipes("Recipes_URL.csv")
     #print(my_recps)
     recipe_list = [{"bread": 1.0, "oil": 4.0, "butter": 17.0}]
     user_pantry = get_user_foods()
