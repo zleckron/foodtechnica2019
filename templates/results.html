@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>LetsGitThisBread</title>
+  </head>
+  <body>
+    <form name="ingredients" action="/recipe" method="post">
+        <p>Recipes in your budget:</p>
+        <select name="ing1">
+        {% for ing in recipes %}
+        <option value="{{ ing }}">{{ ing }}</option>
+        {% endfor %}
+      </select>
+  </body>
+</html>
