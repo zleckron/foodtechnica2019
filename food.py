@@ -86,7 +86,7 @@ def give_recipes(user_ingredients):
     #values = list(user_ingredients.values())
     print(len(values))
     #cut off the last value in the dict (it's the budget)
-    matching = match_recipes(values[:-1], make_recipes("Recipes_URL.csv"), float(values[-1]))
+    matching = match_recipes(values[0][:-1], make_recipes("Recipes_URL.csv"), float(values[0][-1]))
     return matching
     #return render_template('results.html', ingredients_list=ingredients)
 
