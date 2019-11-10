@@ -25,7 +25,9 @@ def recipe():
         data = request.form
         print("Request args", data)
         matches = give_recipes(data)
-        return render_template('results.html', recipes=matches)
+        formatted_matches = format_matches(matches)
+
+        return render_template('results.html', recipes=formatted_matches)
 
     else:
         print(request.method)
@@ -49,7 +51,8 @@ def make_recipes(path):
         #print(line_data)
         #remember that the first
         new_recipe["Title"] = line_data[0]
-        for i in range(1, len(line_data) - 2, 2):
+        new_recipe["URL"] = line_data[1]
+        for i in range(2, len(line_data) - 2, 4):
             new_recipe[line_data[i]] = float(line_data[i+1])
         recipes.append(new_recipe)
     return recipes
@@ -82,9 +85,27 @@ def give_recipes(user_ingredients):
     values = list(user_ingredients.values())
     print(len(values))
     #cut off the last value in the dict (it's the budget)
-    matching = match_recipes(values[:-1], make_recipes("Recipes_Prices.csv"), float(values[-1]))
+    matching = match_recipes(values[:-1], make_recipes("Recipes_URL.csv"), float(values[-1]))
     return matching
     #return render_template('results.html', ingredients_list=ingredients)
+
+#matches is a list of 2D lists with dictionary as the first elem, list as the second elem
+#formatted is a list of lists of strings
+def format_matches(matches):
+    formatted = []
+    for match in matches:
+        #get the Title
+        header = match[0]["Title"]
+        header = header + ": " + match[0]["URL"]
+        header += '\n'
+        details = ""
+        details = details + "You still need to buy "
+        for ingredient in match[1]:
+            details = details + ingredient
+            if ingredient != match[1][-1]:
+                details += ", "
+        formatted.append([header, details])
+    return formatted
 
 if __name__ == "__main__":
     app.run()

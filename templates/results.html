@@ -6,11 +6,12 @@
   </head>
   <body>
     <form name="ingredients" action="/recipe" method="post">
-        <p>Recipes in your budget:</p>
-        <select name="ing1">
+        <h2>Recipes in your budget:</h2>
         {% for ing in recipes %}
-        <option value="{{ ing }}">{{ ing }}</option>
+          {% for thing in ing %}
+            <h3><option value="{{ thing }}">{{ thing }}</option><h3>
+          {% endfor %}
+          <hr>
         {% endfor %}
-      </select>
   </body>
 </html>
