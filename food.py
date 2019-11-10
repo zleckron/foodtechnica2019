@@ -26,5 +26,28 @@ def recipe():
         print(request.method)
         return ("oh no")
 
+def make_recipes(path):
+    recipes = []
+    recipefp = open(path, "r")
+    recipes_lines = recipefp.readlines()
+    recipefp.close()
+    #for each line, first item is the title
+    for raw_line in recipes_lines:
+        line = raw_line.strip()
+        new_recipe = {}
+        line_data = line.split(COMMA)
+        #print(line_data)
+        #remember that the first
+        new_recipe["Title"] = line_data[0]
+        for i in range(1, len(line_data) - 2, 2):
+            new_recipe[line_data[i]] = float(line_data[i+1])
+        recipes.append(new_recipe)
+    return recipes
+
+def give_recipes(user_ingredients):
+    #cut off the last value in the dict (it's the budget)
+    matching = match_recipes(dict.values()[:-1], make_recipes("Recipes_Prices.csv"), budget[-1])
+    return render_template('results.html', ingredients_list=ingredients)
+
 if __name__ == "__main__":
     app.run()
