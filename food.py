@@ -85,6 +85,7 @@ def give_recipes(user_ingredients):
     values = [user_ingredients["ing1"], user_ingredients["ing2"],user_ingredients["ing3"], user_ingredients["max"]]
     #values = list(user_ingredients.values())
     print(len(values))
+    print(values)
     #cut off the last value in the dict (it's the budget)
     matching = match_recipes(values[0][:-1], make_recipes("Recipes_URL.csv"), float(values[0][-1]))
     return matching
@@ -109,4 +110,4 @@ def format_matches(matches):
     return formatted
 
 if __name__ == "__main__":
-    app.run(0.0.0.0, port=80)
+    app.run('0.0.0.0', port=80)
