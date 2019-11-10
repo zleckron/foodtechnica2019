@@ -97,7 +97,7 @@ def special_unit_price(available, item, amount):
     return 420.0
 """
 
-def make_recipies(path):
+def make_recipes(path):
     recipes = []
     recipefp = open(path, "r")
     recipes_lines = recipefp.readlines()
@@ -115,6 +115,10 @@ def make_recipies(path):
         recipes.append(new_recipe)
     return recipes
 
+"""
+"""
+def pretty_print(final_recipes):
+    print(final_recipes)
 if __name__ == "__main__":
     #load all recipe files in RECIPE_DIR into some list
     #available = load_available_ingredients("Basic_Ing.csv")
@@ -122,7 +126,7 @@ if __name__ == "__main__":
 
     #A test: what recipies can we make given this food
     #hardcoding to test stuff out
-    my_recps = make_recipies("Recipes_Prices.csv")
+    my_recps = make_recipes("Recipes_Prices.csv")
     #print(my_recps)
     recipe_list = [{"bread": 1.0, "oil": 4.0, "butter": 17.0}]
     user_pantry = get_user_foods()
