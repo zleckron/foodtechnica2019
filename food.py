@@ -82,7 +82,8 @@ def match_recipes(pantry, recipes, max_cost):
 def give_recipes(user_ingredients):
     print(type(user_ingredients))
     user_ingredients = dict(user_ingredients)
-    values = list(user_ingredients.values())
+    values = [user_ingredients["ing1"], user_ingredients["ing2"],user_ingredients["ing3"], user_ingredients["max"]]
+    #values = list(user_ingredients.values())
     print(len(values))
     #cut off the last value in the dict (it's the budget)
     matching = match_recipes(values[:-1], make_recipes("Recipes_URL.csv"), float(values[-1]))
